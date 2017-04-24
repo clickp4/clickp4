@@ -2,10 +2,11 @@
 #include "include/metadata.p4"
 #include "include/parser.p4"
 #include "include/wrapper.p4"
-#include "include/module.p4"
 #include "include/start.p4"
 #include "include/rewind.p4"
 #include "include/define.p4"
+#include "include/context.p4"
+#include "include/module.p4"
 
 control ingress {
 

@@ -20,21 +20,26 @@
 
 #define MODULE_INGRESS(M) control module_##M
 
-
-
 #define MODULE_TABLE(M, T) table table_##M##_##T
 #define APPLY_TABLE(M, T) apply(table_##M##_##T)
 
 
 #define MODULE_ACTION(M, A) action action_##M##_##A
-#define APPLY_ACTION(M, T) action_##M##_##T
+#define ACTION(M, T) action_##M##_##T
 
 #define MODULE_CONTROL(M, T) control control_##M##_##T()
-#define APPLY_CONTROL(M, T) control_##M##_##T()
+#define CONTROL(M, T) control_##M##_##T()
 
 #define MODULE_HEADER_TYPE(M, H) header_type type_##M##_##H
-
 #define MODULE_METADATA(M, T, H) metadata type_##M##_##T metadata_##M##_##H
+#define METADATA(M, H) metadata_##M##_##H
+#define METADATA_FIELD(M, H, F) metadata_##M##_##H##.##F
+#define MODIFY_METADATA(M, H, F, V) modify_field(metadata_##M##_##H##.##F, V)
+
+
+
+#define MODULE_FIELD_LIST(M, F) field_list list_##M##_##F
+#define FIELD_LIST(M, F) list_##M##_##F
 
 
 
@@ -42,10 +47,13 @@
 #define DST_MAC ethernet.dst_addr
 #define ETH_TYPE ethernet.eth_type
 
-#define SRC_IPv4_ADDR  ipv4.src_addr
-#define DST_IPv4_ADDR  ipv4.dst_addr
-#define SRC_IPv6_ADDR  ipv6.src_addr
-#define DST_IPv6_ADDR  ipv6.dst_addr
+#define IPv4_SRC_ADDR  ipv4.src_addr
+#define IPv4_DST_ADDR  ipv4.dst_addr
+#define IPv4_PROTO     ipv4.proto
+
+#define IPv6_SRC_ADDR  ipv6.src_addr
+#define IPv6_DST_ADDR  ipv6.dst_addr
+#define IPv6_NEXT_HDR  ipv6.next_hdr
 
 
 #endif

@@ -53,7 +53,7 @@ header_type ipv4_t {
         flags : 3;
         frag_offset : 13;
         ttl : 8;
-        protocol : 8;
+        proto : 8;
         checksum : 16;
         src_addr : 32;
         dst_addr: 32;
