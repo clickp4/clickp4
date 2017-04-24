@@ -6,7 +6,6 @@
  * underlay protocol. The udp port# for vxlan-gpe is assume to be 4790
  * Only IPv4 is supported as underlay protocol in this example.
  */
-#ifdef INT_ENABLE
 header_type int_metadata_t {
     fields {
         switch_id           : 32;

@@ -6,7 +6,8 @@ def parse_modules():
     module.write('#ifndef __CLICK_MODULE__\n')
     module.write('#define __CLICK_MODULE__\n\n')
     print('Compiling modules into ClickP4:')
-    for m in config:
+    for m in config.readlines():
+        m = m.strip('\n')
         module.write('#include \"../module/%s.p4\"\n'%(m))
     i = 1
 
@@ -14,9 +15,10 @@ def parse_modules():
 
     config.seek(0)
     for m in config:
+        m = m.strip('\n')
         print('Module %d : %s'%(i, m))
         if not os.path.exists('src/module/%s.p4'%(m)):
-            print 'Cannot find fiels of %s\n'%(m)
+            print 'Cannot find files of %s\n'%(m)
             exit(1)
 
         module.write('#define MODULE_%d module_%s()\n'%(i, m))
@@ -34,11 +36,12 @@ def parse_context():
     module.write('#define __CLICK_CONTEXT__\n\n')
     print('Loading context:')
     i = 1
-    for m in config:
+    for m in config.readlines():
+        m = m.strip('\n')
         if not os.path.exists('src/context/%s.p4'%(m)):
-            print 'Cannot find fiels of %s\n'%(m)
+            print 'Cannot find files of %s\n'%(m)
             exit(1)
-        print('Module %d : %s'%(i, m))
+        print('Context %d : %s'%(i, m))
         module.write('#include \"../context/%s.p4\"\n'%(m))
         i = i + 1
 

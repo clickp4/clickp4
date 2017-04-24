@@ -92,8 +92,8 @@ header_type icmp_t {
  */
 header_type tcp_t {
     fields {
-        srcPort : 16;
-        dstPort : 16;
+        src_port : 16;
+        dst_port : 16;
         seqNo : 32;
         ackNo : 32;
         dataOffset : 4;
@@ -111,8 +111,8 @@ header_type tcp_t {
  */
 header_type udp_t {
     fields {
-        srcPort : 16;
-        dstPort : 16;
+        src_port : 16;
+        dst_port : 16;
         length_ : 16;
         checksum : 16;
     }
@@ -124,8 +124,8 @@ header_type udp_t {
  */
 header_type sctp_t {
     fields {
-        srcPort : 16;
-        dstPort : 16;
+        src_port : 16;
+        dst_port : 16;
         verifTag : 32;
         checksum : 32;
     }

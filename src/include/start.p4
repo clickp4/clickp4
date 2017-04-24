@@ -17,8 +17,10 @@ table pipeline_start_table {
         SRC_MAC : ternary;
         DST_MAC : ternary;
         ETH_TYPE : ternary;
-        SRC_IPv4_ADDR : ternary;
-        DST_IPv4_ADDR : ternary;
+        IPv4_SRC_ADDR : ternary;
+        IPv4_DST_ADDR : ternary;
+        IPv6_SRC_ADDR : ternary;
+        IPv6_DST_ADDR : ternary;
     }
 
     actions {

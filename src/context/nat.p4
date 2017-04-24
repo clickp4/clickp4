@@ -3,7 +3,7 @@
 /*
  * NAT processing
  */
-
+#define NAT_MODE_NONE 0
 header_type nat_metadata_t {
     fields {
         ingress_nat_mode : 2;          /* 0: none, 1: inside, 2: outside */

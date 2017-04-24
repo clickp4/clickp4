@@ -1,9 +1,12 @@
 /**
  * P4 211
- * ClickP4 
- * MODIFIED
+ * ClickP4 221
+ * MODIFIED 30
  */
 #define MODULE　nat
+#define IP_NAT_TABLE_SIZE 1024
+#define IP_NAT_FLOW_TABLE_SIZE 1024
+#define EGRESS_NAT_TABLE_SIZE 1024
 #ifndef NAT_DISABLE
 /*****************************************************************************/
 /* Ingress NAT lookup - src, dst, twice                                      */
@@ -132,58 +135,58 @@ action nat_update_l4_checksum() {
 }
 
 action set_nat_src_rewrite(src_ip) {
-    modify_field(ipv4.srcAddr, src_ip);
+    modify_field(ipv4.src_addr, src_ip);
     nat_update_l4_checksum();
 }
 
 action set_nat_dst_rewrite(dst_ip) {
-    modify_field(ipv4.dstAddr, dst_ip);
+    modify_field(ipv4.dst_addr, dst_ip);
     nat_update_l4_checksum();
 }
 
 action set_nat_src_dst_rewrite(src_ip, dst_ip) {
-    modify_field(ipv4.srcAddr, src_ip);
-    modify_field(ipv4.dstAddr, dst_ip);
+    modify_field(ipv4.src_addr, src_ip);
+    modify_field(ipv4.dst_addr, dst_ip);
     nat_update_l4_checksum();
 }
 
 action set_nat_src_udp_rewrite(src_ip, src_port) {
-    modify_field(ipv4.srcAddr, src_ip);
-    modify_field(udp.srcPort, src_port);
+    modify_field(ipv4.src_addr, src_ip);
+    modify_field(udp.src_port, src_port);
     nat_update_l4_checksum();
 }
 
 action set_nat_dst_udp_rewrite(dst_ip, dst_port) {
-    modify_field(ipv4.dstAddr, dst_ip);
-    modify_field(udp.dstPort, dst_port);
+    modify_field(ipv4.dst_addr, dst_ip);
+    modify_field(udp.dst_port, dst_port);
     nat_update_l4_checksum();
 }
 
 action set_nat_src_dst_udp_rewrite(src_ip, dst_ip, src_port, dst_port) {
-    modify_field(ipv4.srcAddr, src_ip);
-    modify_field(ipv4.dstAddr, dst_ip);
-    modify_field(udp.srcPort, src_port);
-    modify_field(udp.dstPort, dst_port);
+    modify_field(ipv4.src_addr, src_ip);
+    modify_field(ipv4.dst_addr, dst_ip);
+    modify_field(udp.src_port, src_port);
+    modify_field(udp.dst_port, dst_port);
     nat_update_l4_checksum();
 }
 
 action set_nat_src_tcp_rewrite(src_ip, src_port) {
-    modify_field(ipv4.srcAddr, src_ip);
-    modify_field(tcp.srcPort, src_port);
+    modify_field(ipv4.src_addr, src_ip);
+    modify_field(tcp.src_port, src_port);
     nat_update_l4_checksum();
 }
 
 action set_nat_dst_tcp_rewrite(dst_ip, dst_port) {
-    modify_field(ipv4.dstAddr, dst_ip);
-    modify_field(tcp.dstPort, dst_port);
+    modify_field(ipv4.dst_addr, dst_ip);
+    modify_field(tcp.dst_port, dst_port);
     nat_update_l4_checksum();
 }
 
 action set_nat_src_dst_tcp_rewrite(src_ip, dst_ip, src_port, dst_port) {
-    modify_field(ipv4.srcAddr, src_ip);
-    modify_field(ipv4.dstAddr, dst_ip);
-    modify_field(tcp.srcPort, src_port);
-    modify_field(tcp.dstPort, dst_port);
+    modify_field(ipv4.src_addr, src_ip);
+    modify_field(ipv4.dst_addr, dst_ip);
+    modify_field(tcp.src_port, src_port);
+    modify_field(tcp.dst_port, dst_port);
     nat_update_l4_checksum();
 }
 
@@ -220,4 +223,4 @@ MODULE_INGRESS(nat) {
     process_ingress_nat();
     process_egress_nat();
 }
-#undef nat
+#undef MODULE

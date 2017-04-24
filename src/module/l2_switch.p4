@@ -11,7 +11,7 @@ MODULE_TABLE(l2_switch, dmac) {
     }
 
     actions {
-        APPLY_ACTION(l2_switch, forward);
+        ACTION(l2_switch, forward);
     }
 
 }

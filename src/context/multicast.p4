@@ -4,7 +4,7 @@
 /*
  * Multicast processing
  */
-
+#define BD_BIT_WIDTH 16
 header_type multicast_metadata_t {
     fields {
         ipv4_mcast_key_type : 1;               /* 0 bd, 1 vrf */
