@@ -16,6 +16,8 @@
 #include "../context/nat.p4"
 #include "../context/qos.p4"
 #include "../context/tunnel.p4"
+#include "../context/sflow.p4"
+#include "../context/security.p4"
 
 
 #endif

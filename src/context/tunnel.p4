@@ -27,4 +27,7 @@ header_type tunnel_metadata_t {
 }
 metadata tunnel_metadata_t tunnel_metadata;
 
+header ipv4_t inner_ipv4;
+header ipv6_t inner_ipv6;
+
 #endif

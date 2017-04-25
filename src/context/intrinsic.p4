@@ -73,3 +73,41 @@ action deflect_on_drop(enable_dod) {
     ((standard_metadata.instance_type == PKT_INSTANCE_TYPE_NORMAL) or \
      (standard_metadata.instance_type == PKT_INSTANCE_TYPE_REPLICATION))
 #endif
+
+/* METADATA */
+header_type ingress_metadata_t {
+    fields {
+        ingress_port : 9;                      /* input physical port */
+        ifindex : IFINDEX_BIT_WIDTH;           /* input interface index */
+        egress_ifindex : IFINDEX_BIT_WIDTH;    /* egress interface index */
+        port_type : 2;                         /* ingress port type */
+
+        outer_bd : BD_BIT_WIDTH;               /* outer BD */
+        bd : BD_BIT_WIDTH;                     /* BD */
+
+        drop_flag : 1;                         /* if set, drop the packet */
+        drop_reason : 8;                       /* drop reason */
+        control_frame: 1;                      /* control frame */
+        bypass_lookups : 16;                   /* list of lookups to skip */
+        sflow_take_sample : 32 (saturating);
+    }
+}
+
+header_type egress_metadata_t {
+    fields {
+        bypass : 1;                            /* bypass egress pipeline */
+        port_type : 2;                         /* egress port type */
+        payload_length : 16;                   /* payload length for tunnels */
+        smac_idx : 9;                          /* index into source mac table */
+        bd : BD_BIT_WIDTH;                     /* egress inner bd */
+        outer_bd : BD_BIT_WIDTH;               /* egress inner bd */
+        mac_da : 48;                           /* final mac da */
+        routed : 1;                            /* is this replica routed */
+        same_bd_check : BD_BIT_WIDTH;          /* ingress bd xor egress bd */
+        drop_reason : 8;                       /* drop reason */
+        ifindex : IFINDEX_BIT_WIDTH;           /* egress interface index */
+    }
+}
+
+metadata ingress_metadata_t ingress_metadata;
+metadata egress_metadata_t egress_metadata;

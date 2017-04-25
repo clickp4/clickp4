@@ -1,8 +1,6 @@
 #ifndef __CLICK_CONTEXT_ACL__
 #define __CLICK_CONTEXT_ACL__
 
-#define NEXTHOP_TYPE_SIMPLE 0
-#define NEXTHOP_TYPE_ECMP 1
 /*
  * ACL metadata
  */

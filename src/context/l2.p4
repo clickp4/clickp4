@@ -1,8 +1,7 @@
 /*
  * Layer-2 processing
  */
-#define MAC_TABLE_SIZE 1024
-#define IFINDEX_BIT_WIDTH 16
+
 header_type l2_metadata_t {
     fields {
         lkp_mac_sa : 48;
