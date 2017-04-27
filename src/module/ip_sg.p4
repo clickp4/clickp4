@@ -1,7 +1,7 @@
 /**
  * P4 47
- * ClickP4 49
- * Modified 3
+ * ClickP4 49+1
+ * Modified 3+2+4
  */
 #define MODULE ip_sg
 #ifndef IPSG_DISABLE
@@ -14,9 +14,10 @@ action ipsg_miss() {
 
 table ipsg_permit_special {
     reads {
-        l3_metadata.lkp_ip_proto : ternary;
-        l3_metadata.lkp_l4_dport : ternary;
-        ipv4_metadata.lkp_ipv4_da : ternary;
+        IPv4_PROTO : ternary;
+        udp.dst_port : ternary;
+        tcp.dst_port : ternary;
+        IPv4_DST_ADDR : ternary;
     }
     actions {
         ipsg_miss;
@@ -28,8 +29,8 @@ table ipsg {
     reads {
         ingress_metadata.ifindex : exact;
         ingress_metadata.bd : exact;
-        l2_metadata.lkp_mac_sa : exact;
-        ipv4_metadata.lkp_ipv4_sa : exact;
+        SRC_MAC : exact;
+        IPv4_SRC_ADDR : exact;
     }
     actions {
         on_miss;

@@ -1,8 +1,8 @@
 import os
 
 def parse_modules():
-    config = open('src/config/modules', 'r')
-    module = open('src/include/module.p4', 'w')
+    config = open('config/modules', 'r')
+    module = open('src/core/module.p4', 'w')
     module.write('#ifndef __CLICK_MODULE__\n')
     module.write('#define __CLICK_MODULE__\n\n')
     print('Compiling modules into ClickP4:')
@@ -30,8 +30,8 @@ def parse_modules():
     module.close()
 
 def parse_context():
-    config = open('src/config/context', 'r')
-    module = open('src/include/context.p4', 'w')
+    config = open('config/context', 'r')
+    module = open('src/core/context.p4', 'w')
     module.write('#ifndef __CLICK_CONTEXT__\n')
     module.write('#define __CLICK_CONTEXT__\n\n')
     print('Loading context:')

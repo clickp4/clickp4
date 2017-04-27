@@ -5,15 +5,7 @@
  * Modified 3
  */
 #define MODULE HASH
-header_type hash_metadata_t {
-    fields {
-        hash1 : 16;
-        hash2 : 16;
-        entropy_hash : 16;
-    }
-}
 
-metadata hash_metadata_t hash_metadata;
 
 field_list lkp_ipv4_hash1_fields {
     ipv4_metadata.lkp_ipv4_sa;

@@ -1,7 +1,7 @@
 /**
  * P4 97
  * ClickP4 99
- * Modified 2+1+5
+ * Modified 10
  */
 #define MODULE mac
 #ifndef L2_DISABLE
@@ -19,7 +19,7 @@ action smac_hit(ifindex) {
 table smac {
     reads {
         ingress_metadata.bd : exact;
-        l2_metadata.lkp_mac_sa : exact;
+        SRC_MAC : exact;
     }
     actions {
         nop;
@@ -70,7 +70,7 @@ action dmac_drop() {
 table dmac {
     reads {
         ingress_metadata.bd : exact;
-        l2_metadata.lkp_mac_da : exact;
+        DST_MAC : exact;
     }
     actions {
 #ifdef OPENFLOW_ENABLE

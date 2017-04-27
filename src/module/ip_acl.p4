@@ -2,7 +2,7 @@
  * IP ACL
  * P4 73
  * ClickP4 75
- * Modified 11
+ * Modified 11+1+1
  */
 #define MODULE ip_acl
 #ifndef IPV4_DISABLE
@@ -18,7 +18,7 @@ table ip_acl {
         acl_metadata.ingress_dst_port_range_id : exact;
 
         tcp.flags : ternary;
-        l3_metadata.lkp_ip_ttl : ternary;
+        ipv4.ttl : ternary;
     }
     actions {
         nop;
@@ -47,7 +47,7 @@ table ipv6_acl {
         acl_metadata.ingress_dst_port_range_id : exact;
 
         tcp.flags : ternary;
-        l3_metadata.lkp_ip_ttl : ternary;
+        ipv6.ttl : ternary;
     }
     actions {
         nop;
