@@ -1,0 +1,9 @@
+#!/bin/bash
+
+export CLICKP4_ROOT=/home/$USER/clickp4
+
+cd $CLICKP4_ROOT
+
+echo "l2_switch">config/modules
+
+make json
