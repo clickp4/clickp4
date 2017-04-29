@@ -30,7 +30,7 @@ table tbl_pipeline_start {
 }
 
 control pipeline_start {
-    apply(pipeline_start_table);
+    apply(tbl_pipeline_start);
 }
 
 #endif

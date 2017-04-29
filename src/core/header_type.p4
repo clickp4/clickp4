@@ -48,7 +48,7 @@ header_type ipv4_t {
         version : 4;
         ihl : 4;
         diffserv : 8;
-        totalLen : 16;
+        total_len : 16;
         identification : 16;
         flags : 3;
         frag_offset : 13;

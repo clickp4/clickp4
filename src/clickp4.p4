@@ -11,7 +11,7 @@
 control ingress {
 
     CHECK(0) {
-        pipeline_start();
+//        pipeline_start();
     }
 
 #ifdef MODULE_1
@@ -394,7 +394,7 @@ control egress {
 #endif
 
     CHECK(63){
-        pipeline_rewind();
+//        pipeline_rewind();
     }
 
 }
