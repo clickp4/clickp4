@@ -3,16 +3,16 @@
 
 #include "wrapper.p4"
 
-action set_chain(chain_id, bitmap) {
+action act_set_chain(chain_id, bitmap) {
     SET_CLICK_ID(chain_id);
     SET_CLICK_BITMAP(bitmap);
 }
 
-action set_bitmap(bitmap) {
+action act_set_bitmap(bitmap) {
     SET_CLICK_BITMAP(bitmap);
 }
 
-table pipeline_start_table {
+table tbl_pipeline_start {
     reads {
         SRC_MAC : ternary;
         DST_MAC : ternary;
@@ -24,8 +24,8 @@ table pipeline_start_table {
     }
 
     actions {
-        set_chain;
-        set_bitmap;
+        act_set_chain;
+        act_set_bitmap;
     }
 }
 

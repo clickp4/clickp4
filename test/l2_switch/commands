@@ -1,2 +1,3 @@
-table_add dmac forward 0x800e00010002 => 2
-table_add dmac forward 0x800e00010001 => 1
+table_add dmac forward 0x802200010002 => 2
+table_add dmac forward 0x802200010001 => 1
+table_add tbl_pipeline_start act_set_bitmap 0&&&0 0&&&0 0x0800&&&0xFFFF 0&&&0 0&&&0 0&&&0 0&&&0 => 0xFFFFFFFFFFFFFFFD 1
