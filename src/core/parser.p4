@@ -20,12 +20,20 @@ parser parse_ethernet {
 
 parser parse_ipv4 {
     extract(ipv4);
-    return ingress;
+    return select(ipv4.proto) {
+        IP_PROTO_TCP : parse_tcp;
+        IP_PROTO_UDP : parse_udp;
+        default : ingress;
+    }
 }
 
 parser parse_ipv6 {
     extract(ipv6);
-    return ingress;
+    return select(ipv6.next_hdr) {
+        IP_PROTO_TCP : parse_tcp;
+        IP_PROTO_UDP : parse_udp;
+        default : ingress;
+    }
 }
 
 parser parse_vlan {
@@ -35,6 +43,16 @@ parser parse_vlan {
         ETH_TYPE_IPv6 : parse_ipv6;
         default : ingress;
     }
+}
+
+parser parse_tcp {
+    extract(tcp);
+    return ingress;
+}
+
+parser parse_udp {
+    extract(udp);
+    return ingress;
 }
 
 #endif
