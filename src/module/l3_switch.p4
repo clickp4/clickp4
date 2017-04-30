@@ -88,4 +88,4 @@ MODULE_INGRESS(l3_switch) {
         apply(send_frame);
     }
 }
-#undef l3_switch
+#undef MODULE
