@@ -11,7 +11,7 @@
 control ingress {
 
     CHECK(0) {
-//        pipeline_start();
+        pipeline_start();
     }
 
 #ifdef MODULE_1

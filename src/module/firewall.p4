@@ -2,10 +2,10 @@
 
 table firewall_with_tcp {
     reads {
-        ipv4.srcAddr : ternary;
-        ipv4.dstAddr : ternary;
-        tcp.srcPort  : ternary;
-        tcp.dstPort  : ternary;
+        ipv4.src_addr : ternary;
+        ipv4.dst_addr : ternary;
+        tcp.src_port  : ternary;
+        tcp.dst_port  : ternary;
     }
     actions {
         block;
@@ -15,14 +15,14 @@ table firewall_with_tcp {
 
 table firewall_with_udp {
     reads {
-        ipv4.srcAddr : ternary;
-        ipv4.dstAddr : ternary;
-        udp.srcPort  : ternary;
-        udp.dstPort  : ternary;
+        ipv4.src_addr : ternary;
+        ipv4.dst_addr : ternary;
+        udp.src_port  : ternary;
+        udp.dst_port  : ternary;
     }
     actions {
         block;
-        noop;
+        nop;
     }
 }
 

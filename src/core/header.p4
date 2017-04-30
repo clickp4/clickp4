@@ -9,8 +9,8 @@
 #define ETH_TYPE_MPLS   0x8847
 #define ETH_TYPE_VLAN   0x9100
 
-#define IP_PROTO_TCP
-#define IP_PROTO_UDP 
+#define IP_PROTO_TCP    6
+#define IP_PROTO_UDP    17
 
 header ethernet_t ethernet;
 header ipv4_t ipv4;

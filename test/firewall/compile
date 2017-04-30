@@ -2,6 +2,6 @@
 
 cd ../../
 
-echo "l2_switch">config/modules
+echo "firewall">config/modules
 
 make json
