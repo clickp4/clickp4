@@ -1,0 +1,10 @@
+table_add tbl_pipeline_start act_set_bitmap 0&&&0 0&&&0 0x0800&&&0xFFFF 0&&&0 0&&&0 0&&&0 0&&&0 => 0xFFFFFFFFFFFFFFFD 1
+
+table_add forward_table forward 1 => 2
+table_add forward_table forward 2 => 1
+
+table_add firewall_with_tcp block 10.0.0.1&&&255.255.255.255 10.0.0.2&&&255.255.255.255 0&&&0 0x8000&&&0x8000 => 1
+table_set_default firewall_with_tcp nop
+
+table_add firewall_with_udp block 10.0.0.1&&&255.255.255.255 10.0.0.2&&&255.255.255.255 0&&&0 0x8000&&&0x8000 => 1
+table_set_default firewall_with_udp nop
