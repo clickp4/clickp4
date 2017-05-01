@@ -10,6 +10,7 @@ action on_miss() {
 }
 
 action block() {
+	modify_field(security_metadata.drop_flag, 1);
     drop();
 }
 

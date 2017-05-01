@@ -5,6 +5,7 @@
 #include "../protocol/tcp.p4"
 #include "../protocol/ipv6.p4"
 #include "../protocol/ipv4.p4"
+#include "../protocol/vlan.p4"
 #include "../protocol/ethernet.p4"
 
 

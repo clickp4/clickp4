@@ -105,10 +105,10 @@ MODULE_INGRESS(simple_acl) {
     
     if (security_metadata.state != SEC_STATE_DENY) {
         if (ETH_TYPE == ETH_TYPE_IPv4) {
-            apply(ip_acl);
+            apply(ipv4_acl);
         } 
         else if (ETH_TYPE == ETH_TYPE_IPv6) {
-                apply(ipv6_acl);
+            apply(ipv6_acl);
         }
     }
 
