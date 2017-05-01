@@ -1,5 +1,4 @@
 ethernet
-vlan
 ipv4
 ipv6
 tcp

@@ -38,7 +38,7 @@ header ipv4_t ipv4;
 parser parse_ipv4 {
     extract(ipv4);
     return select(ipv4.proto) {
-#ifdef TCP_RPTOTO
+#ifdef TCP_PROTO
     IP_PROTO_TCP : parse_tcp;
 #endif
 

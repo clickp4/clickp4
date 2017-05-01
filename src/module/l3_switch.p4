@@ -64,7 +64,7 @@ table ipv4_nhop {
 
 action set_dmac(dmac, port) {
     modify_field(ethernet.dst_addr, dmac);
-    modify_field(standard_metadata.egress_spec, port);
+    forward(port);
 }
 
 table forward_table {

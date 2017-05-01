@@ -66,14 +66,16 @@ def parse_protocol():
             exit(1)
         if i == 1:
             start = m
+
         protocols.append(m)
         print('Protocol %d : %s'%(i, m))
+        i = i + 1
         
     while protocols:
         protocol.write('#include \"../protocol/%s.p4\"\n'%(protocols.pop()))
 
     protocol.write('\n\nparser start {\n')
-    protocol.write('\t\t return parse_%s;'%(start))
+    protocol.write('\treturn parse_%s;\n'%(start))
     protocol.write('}\n')
 
     config.close();
