@@ -1,8 +1,4 @@
-/**
- * P4 60
- * ClickP4
- * Modified 3
- */
+
 #define MODULE sflow
 #ifdef SFLOW_ENABLE
 action sflow_ing_session_enable(rate_thr, session_id)

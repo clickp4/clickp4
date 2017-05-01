@@ -1,6 +1,5 @@
-#include "core/header.p4"
+#include "core/protocol.p4"
 #include "core/metadata.p4"
-#include "core/parser.p4"
 #include "core/wrapper.p4"
 #include "core/start.p4"
 #include "core/rewind.p4"

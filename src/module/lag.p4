@@ -1,7 +1,7 @@
 /**
  * P4 57
  * ClickP4 59
- * Modified 3
+ * Modified 7
  */
 #define MODULE lag
 /*****************************************************************************/
@@ -52,7 +52,7 @@ action_profile lag_action_profile {
 
 table lag_group {
     reads {
-        ingress_metadata.egress_ifindex : exact;
+        standard_metadata.egress_spec : exact;
     }
     action_profile: lag_action_profile;
     size : LAG_SELECT_TABLE_SIZE;
