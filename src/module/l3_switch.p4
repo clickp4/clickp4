@@ -83,7 +83,7 @@ action set_smac(smac) {
 
 table send_frame {
     reads {
-        standard_metadata.egress_port: exact;
+        standard_metadata.egress_spec: exact;
     }
     actions {
         set_smac;

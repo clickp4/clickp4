@@ -15,7 +15,7 @@
 #define SIMPLE_ACL_TCP 1
 #endif
 
-#ifndef SIMPLE_ACL_TCP
+#ifndef SIMPLE_ACL_UDP
 #define SIMPLE_ACL_UDP 1
 #endif
 
@@ -52,7 +52,7 @@ table ipv4_acl {
         tcp.flags     : ternary;
 #endif
 
-# if SIMPLE_ACL_UDP == 1
+#if SIMPLE_ACL_UDP == 1
         udp           : valid;
         udp.src_port  : ternary;
         udp.dst_port  : ternary;
@@ -73,13 +73,13 @@ table ipv6_acl {
         ipv6.dst_addr : ternary;
         ipv6.next_hdr : ternary;
 
-#if SIMPLE_ACL_TCP
+#if SIMPLE_ACL_TCP == 1
         tcp           : valid;
         tcp.src_port  : ternary;
         tcp.dst_port  : ternary;
         tcp.flags     : ternary;
 #endif
-#if SIMPLE_ACL_UDP
+#if SIMPLE_ACL_UDP == 1
         udp           : valid;
         udp.src_port  : ternary;
         udp.dst_port  : ternary;

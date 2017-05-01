@@ -1,4 +1,4 @@
-table_add tbl_pipeline_start act_set_bitmap 0&&&0 0&&&0 0x0800&&&0xFFFF 0&&&0 0&&&0 0&&&0 0&&&0 => 0xFFFFFFFFFFFFFFFD 1
+table_add tbl_pipeline_start act_set_bitmap 0&&&0 0&&&0 0x0800&&&0xFFFF 0&&&0 0&&&0 0&&&0 0&&&0 0&&&0 0&&&0 => 0xFFFFFFFFFFFFFFFD 1
 table_add ipv4_nhop set_nhop 0x0a000001/32 => 0x0a000001
 table_add ipv4_nhop set_nhop 0x0a000002/32 => 0x0a000002
 table_add forward_table set_dmac 0x0a000001 => 0x802200010001 1

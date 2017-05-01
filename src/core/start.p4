@@ -14,13 +14,13 @@ action act_set_bitmap(bitmap) {
 
 table tbl_pipeline_start {
     reads {
-        SRC_MAC : ternary;
-        DST_MAC : ternary;
-        ETH_TYPE : ternary;
         IPv4_SRC_ADDR : ternary;
         IPv4_DST_ADDR : ternary;
-        IPv6_SRC_ADDR : ternary;
-        IPv6_DST_ADDR : ternary;
+        IPv4_PROTO    : ternary;
+        tcp.dst_port : ternary;
+        tcp.src_port : ternary;
+        udp.dst_port : ternary;
+        udp.src_port : ternary;
     }
 
     actions {
