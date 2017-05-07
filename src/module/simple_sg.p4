@@ -53,19 +53,20 @@ table ipv4_permit_special {
     actions {
         sg_miss;
     }
-    size : IPSG_PERMIT_SPECIAL_TABLE_SIZE;
+    size : 1024;
 }
 
 table ipv4_sg {
     reads {
         standard_metadata.ingress_port : exact;
-        ethernet.src_mac : exact;
+        ethernet.src_addr : exact;
         ipv4.src_addr : exact;
     }
     actions {
+        nop;
         on_miss;
     }
-    size : IPSG_TABLE_SIZE;
+    size : 1024;
 }
 
 table ipv6_permit_special {
@@ -88,19 +89,20 @@ table ipv6_permit_special {
     actions {
         sg_miss;
     }
-    size : IPSG_PERMIT_SPECIAL_TABLE_SIZE;
+    size : 1024;
 }
 
 table ipv6_sg {
     reads {
         standard_metadata.ingress_port : exact;
-        ethernet.src_mac : exact;
+        ethernet.src_addr : exact;
         ipv6.src_addr : exact;
     }
     actions {
+        nop;
         on_miss;
     }
-    size : IPSG_TABLE_SIZE;
+    size : 1024;
 }
 
 table sg_inline_drop {
@@ -117,7 +119,7 @@ MODULE_INGRESS(simple_sg) {
             }
         }
     } 
-    else if (CHECK_ETH_TYPE(Ipv6)) {
+    else if (CHECK_ETH_TYPE(IPv6)) {
     	apply(ipv6_sg) {
             on_miss {
                 apply(ipv6_permit_special);
@@ -127,7 +129,7 @@ MODULE_INGRESS(simple_sg) {
 
 #if SIMPLE_SG_INLINE_DROP == 1
 	if (security_metadata.state == SEC_STATE_DENY) {
-		apply(sg_inline_drop)
+		apply(sg_inline_drop);
 	}
 #endif
 
@@ -137,4 +139,4 @@ MODULE_INGRESS(simple_sg) {
 #undef SIMPLE_SG_TCP_PERMIT
 #undef SIMPLE_SG_RESULT
 #undef SIMPLE_SG_UDP_PERMIT
-#endif
+#undef MODULE

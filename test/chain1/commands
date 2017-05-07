@@ -1,0 +1,13 @@
+table_add tbl_pipeline_start act_set_bitmap 0&&&0 0&&&0 0x0800&&&0xFFFF 0&&&0 0&&&0 0&&&0 0&&&0 0&&&0 0&&&0 => 0xFFFFFFFFFFFFFFF1 1
+table_add ipv4_nhop set_nhop 0x0a000001/32 => 0x0a000001
+table_add ipv4_nhop set_nhop 0x0a000002/32 => 0x0a000002
+table_add forward_table set_dmac 0x0a000001 => 0x802200010001 1
+table_add forward_table set_dmac 0x0a000002 => 0x802200010002 2
+table_add send_frame set_smac 1 => 0x000000000001
+table_add send_frame set_smac 2 => 0x000000000002
+table_add ipv4_acl simple_acl_deny 1&&&0xFF 0x0a000001&&&0xFFFFFFFF 0x0a000002&&&0xFFFFFFFF 0x90&&&0xFF 0 0&&&0 0&&&0 0&&&0 0 0&&&0 0&&&0 => 0
+table_add ipv4_acl simple_acl_deny 2&&&0xFF 0x0a000002&&&0xFFFFFFFF 0x0a000001&&&0xFFFFFFFF 0x90&&&0xFF 0 0&&&0 0&&&0 0&&&0 0 0&&&0 0&&&0 => 0
+table_add ipv4_sg nop 1 0x802200010001 0x0a000001 =>
+table_add ipv4_sg nop 2 0x802200010002 0x0a000002 =>
+table_set_default ipv4_acl nop
+table_set_default simple_acl_inline_drop block
