@@ -31,6 +31,15 @@ run-exp3:
 	@cp build/clickp4.json $(SWITCH_DIR)
 	@cd $(SWITCH_DIR)&&sudo bash simple_switch clickp4.json $(INTF) $(LOG) -- --controller-ip=$(CONTROLLER_IP) --controller-port=$(CONTROLLER_PORT) 
 
+run-exp4:
+	@cp test/chain4/commands $(SWITCH_DIR)
+	@cp test/chain4/modules config/modules
+	@make json
+	@cp build/clickp4.json $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&sudo bash simple_switch clickp4.json $(INTF) $(LOG) -- --controller-ip=$(CONTROLLER_IP) --controller-port=$(CONTROLLER_PORT) 
+
+populate-exp4:
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
 
 list:
 	@echo "ClickP4 Modules:"
