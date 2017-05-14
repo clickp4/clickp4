@@ -12,4 +12,24 @@ header_type vxlan_t {
 
 header vxlan_t vxlan;
 
+
+parser parse_vxlan {
+    extract(vxlan);
+    extarct(inner_ethernet);
+    return parse_inner_ethernet;
+}
+
+
+parser parse_inner_ethernet {
+    extarct(inner_ethernet);
+    
+    return parse_inner_ipv4;
+}
+
+parser parse_inner_ipv4 {
+    extract(inner_ipv4);
+}
+
+parser parser_inner
+
 #endif
