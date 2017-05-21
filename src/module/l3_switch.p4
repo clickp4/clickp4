@@ -1,16 +1,26 @@
 #define MODULE l3_switch
 
 /* Context Dependency */
+#if L3_SWITCH_BYPASS == 1
 #ifndef SECURITY_CONTEXT
 #include "../context/security.p4"
 #endif
-
-/* Module parameter  */
-#ifndef L3_SWITCH_TBL_SIZE 
-#define L3_SWITCH_TBL_SIZE 1024
 #endif
 
+/* Module parameter  */
+#ifndef L3_SWITCH_TABLE_SIZE 
+#define L3_SWITCH_TABLE_SIZE 1024
+#endif
 
+#ifndef L3_SWITCH_CHECKSUM
+#define L3_SWITCH_CHECKSUM 1
+#endif
+
+#ifndef L3_SWITCH_BYPASS 
+#define L3_SWITCH_BYPASS 1
+#endif
+
+#if L3_SWITCH_CHECKSUM == 1
 field_list ipv4_checksum_list {
         ipv4.version;
         ipv4.ihl;
@@ -38,6 +48,8 @@ calculated_field ipv4.checksum  {
     update ipv4_checksum;
 }
 
+#endif
+
 header_type l3_switch_metadata_t {
     fields {
         nhop_ipv4 : 32;
@@ -59,7 +71,7 @@ table ipv4_nhop {
         set_nhop;
         block;
     }
-    size: L3_SWITCH_TBL_SIZE;
+    size: L3_SWITCH_TABLE_SIZE;
 }
 
 action set_dmac(dmac, port) {
@@ -74,7 +86,7 @@ table forward_table {
     actions {
         set_dmac;
     }
-    size: L3_SWITCH_TBL_SIZE;
+    size: L3_SWITCH_TABLE_SIZE;
 }
 
 action set_smac(smac) {
@@ -89,19 +101,23 @@ table send_frame {
         set_smac;
         block;
     }
-    size: 256;
+    size: L3_SWITCH_TABLE_SIZE;
 }
 
 MODULE_INGRESS(l3_switch) {
+#if L3_SWITCH_BYPASS == 1
     if (security_metadata.state != SEC_STATE_DENY) {
+#endif
         if(valid(ipv4) and ipv4.ttl > 0) {
             apply(ipv4_nhop);
             apply(forward_table);
             apply(send_frame);
         }
+#if L3_SWITCH_BYPASS == 1
     }
+#endif
 }
 
-
+#undef L3_SWITCH_TABLE_SIZE
 #undef L3_SWITCH_TBL_SIZE
 #undef MODULE

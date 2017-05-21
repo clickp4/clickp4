@@ -66,5 +66,8 @@
 #define MODULE_MASK_62 （1<<62）
 #define MODULE_MASK_63 （1<<63）
 
+#define TRUE  1
+#define FALSE 0
+
 
 #endif

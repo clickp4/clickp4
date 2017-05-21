@@ -1,14 +1,17 @@
 #define MODULE l2_switch
 
-/* Module parameter */
+/* Module parameters */
 #ifndef L2_SWITCH_LEARN
 #define L2_SWITCH_LEARN 1
 #endif 
 
-#ifndef MAC_LEARN_RECEIVER
-#define MAC_LEARN_RECEIVER 1
+#ifndef L2_SWITCH_SMAC_TABLE_SIZE
+#define L2_SWITCH_SMAC_TABLE_SIZE 1024
 #endif
 
+#ifndef L2_SWITCH_DMAC_TABLE_SIZE
+#define L2_SWITCH_DMAC_TABLE_SIZE 1024
+#endif
 
 #if L2_SWITCH_LEARN == 1
 field_list mac_learn_digest {
@@ -16,10 +19,9 @@ field_list mac_learn_digest {
     ethernet.src_addr;
 }
 
-action mac_learn() {
-    generate_digest(MAC_LEARN_RECEIVER, mac_learn_digest);
+action mac_learn(receiver) {
+    generate_digest(receiver, mac_learn_digest);
 }
-
 
 table smac {
     reads {
@@ -29,7 +31,7 @@ table smac {
         nop;
         mac_learn;
     }
-    size : MAC_TABLE_SIZE;
+    size : L2_SWITCH_SMAC_TABLE_SIZE;
 }
 #endif
 
@@ -41,16 +43,17 @@ table dmac {
     	forward;
     	flood;
     }
-    size : MAC_TABLE_SIZE;
+    size : L2_SWITCH_DMAC_TABLE_SIZE;
 }
 
 MODULE_INGRESS(l2_switch) {
 #if L2_SWITCH_LEARN == 1
     apply(smac);
-#endif
-    
+#endif    
     apply(dmac);
 }
 
+#undef L2_SWITCH_SMAC_TABLE_SIZE
+#undef L2_SWITCH_DMAC_TABLE_SIZE
 #undef L2_SWITCH_LEARN
 #undef MODULE
