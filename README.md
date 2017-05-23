@@ -62,9 +62,19 @@ Then the P4 binary code "clickp4.json" is generated into the "build" folder.
 3. Run ClickP4 on BMv2
 Firstly, check whether the "SWITCH_DIR" parameter in Makefile is right or change it to the right director.(TODO: This can be automatically done.) 
 ```bash
-
+make run
 ```
 
+4. Populate L3_switch 
+```bash
+make populate-l3
+```
+
+5. Test the reachability h1 and h2
+```bash
+$ sudo ip netns exec h1 bash
+$ ping 10.0.0.2
+``` 
 
 #### How to build a module
 

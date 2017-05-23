@@ -2,6 +2,11 @@
 
 We have developed tens of modules for ClickP4. Some of them are ported from the switch repository. Some of them are newly added by us. And some of them are ported from the switch repository of P4.
 
+
+## Sample
+
+A sample module for ClickP4.
+
 ## L2 switch
 
 A layer 2 switch prototype.

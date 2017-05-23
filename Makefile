@@ -11,6 +11,11 @@ compile:
 	@p4c-bmv2 src/clickp4.p4 --json build/clickp4.json
 
 run:
+	@cp build/clickp4.json $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&sudo bash simple_switch clickp4.json $(INTF) $(LOG) -- --controller-ip=$(CONTROLLER_IP) --controller-port=$(CONTROLLER_PORT) 
+
+populate-l3:
+	@cp test/l3_switch/commands $(SWITCH_DIR)
 	@cp test/l3_switch/modules config/modules
 	@make json
 	@cp build/clickp4.json $(SWITCH_DIR)
