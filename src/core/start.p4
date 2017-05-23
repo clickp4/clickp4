@@ -3,6 +3,44 @@
 
 #include "wrapper.p4"
 
+#ifndef INIT_ETH_MATCH
+#define INIT_ETH_MATCH \
+        ethernet.src_addr : ternary; \
+        ethernet.dst_addr : ternary;
+#endif
+
+#ifndef INIT_IPv4_MATCH 
+#define INIT_IPv4_MATCH  \        
+        ipv4.src_addr : ternary; \
+        ipv4.dst_addr : ternary; \
+        ipv4.proto    : ternary;
+#endif
+
+#ifndef INIT_IPv6_MATCH
+#define INIT_IPv6_MATCH \
+        ipv6.src_addr : ternary; \
+        ipv6.dst_addr : ternary; \
+        ipv6.next_hdr : ternary;
+#endif
+
+
+#ifndef INIT_TCP_MATCH
+#define INIT_TCP_MATCH \
+        tcp.dst_port : ternary; \
+        tcp.src_port : ternary;
+#endif
+
+#ifndef INIT_UDP_MATCH
+#define INIT_UDP_MATCH \
+        udp.src_port : ternary; \
+        udp.dst_port : ternary; 
+#endif
+
+#ifndef INIT_MATCH
+#define INIT_MATCH
+#endif
+
+
 action act_set_chain(chain_id, bitmap) {
     SET_CLICK_ID(chain_id);
     SET_CLICK_BITMAP(bitmap);
@@ -14,15 +52,12 @@ action act_set_bitmap(bitmap) {
 
 table tbl_pipeline_start {
     reads {
-        IPv4_SRC_ADDR : ternary;
-        IPv4_DST_ADDR : ternary;
-        IPv4_PROTO    : ternary;
-        tcp.dst_port : ternary;
-        tcp.src_port : ternary;
-        udp.dst_port : ternary;
-        udp.src_port : ternary;
+        INIT_ETH_MATCH
+        INIT_IPv4_MATCH
+        INIT_TCP_MATCH
+        INIT_UDP_MATCH
     }
-
+    
     actions {
         act_set_chain;
         act_set_bitmap;

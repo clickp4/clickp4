@@ -47,7 +47,6 @@ calculated_field ipv4.checksum  {
     verify ipv4_checksum;
     update ipv4_checksum;
 }
-
 #endif
 
 header_type l3_switch_metadata_t {

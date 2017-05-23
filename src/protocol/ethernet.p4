@@ -16,7 +16,7 @@
 #define ETH_TYPE_TRILL        0x22f3
 #define ETH_TYPE_VNTAG        0x8926
 #define ETH_TYPE_LLDP         0x88cc
-#define ETH_TYPE_LACP 		  0x8809
+#define ETH_TYPE_LACP         0x8809
 
 
 header_type ethernet_t {
@@ -51,6 +51,7 @@ parser parse_ethernet {
 #ifdef ARP_PROTO
         ETH_TYPE_ARP : parse_arp;
 #endif
+
 
         default : ingress;
     }

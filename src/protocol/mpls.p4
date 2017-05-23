@@ -1,6 +1,7 @@
 #ifndef MPLS_PROTO
 #define MPLS_PROTO
 
+
 header_type mpls_t {
     fields {
         label : 20;

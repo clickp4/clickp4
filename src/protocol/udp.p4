@@ -9,9 +9,7 @@ header_type udp_t {
     }
 }
 
-
 header udp_t udp;
-
 
 parser parse_udp {
     extract(udp);

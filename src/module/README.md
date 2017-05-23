@@ -71,3 +71,17 @@ Tbale size of the meter.
 DEFAULT: 1024
 ```
 
+## Condition
+
+This module acts like 'switch' in the C language.
+
+## If
+
+This module acts like 'if' in the C language.
+
+## While
+This module acts like 'while' in the C language.
+
+## For
+This module acts like 'for' in the C language.
+

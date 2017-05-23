@@ -41,7 +41,6 @@ parser parse_vlan {
 #ifdef IPv6_PROTO
         ETH_TYPE_IPv6 : parse_ipv6;
 #endif
-
         default : ingress;
     }
 }
