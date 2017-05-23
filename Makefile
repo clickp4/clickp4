@@ -1,4 +1,4 @@
-SWITCH_DIR=/home/netarchlab/onos-p4-dev/onos-bmv2/targets/simple_switch
+SWITCH_DIR=/home/netarchlab/bmv2/targets/simple_switch
 CONTROLLER_DIR=/home/netarchlab/odb/router
 CONTROLLER_IP=101.6.30.157
 CONTROLLER_PORT=40123
@@ -66,3 +66,7 @@ install-bmv2:
 
 setup-veth:
 	@bash tools/setup_veth.sh
+
+clear-veth:
+	@bash tools/clear_veth.sh
+	
