@@ -81,3 +81,6 @@ clear-peth:
 
 clear-veth:
 	@bash tools/clear_veth.sh
+
+nic-offload:
+	@bash tools/disable_nic_offload.sh

@@ -1,18 +1,18 @@
 #ifndef MODULE
-#define MODULE for 
+#define MODULE for
 
 action for_init(threshold) {
-    modify_filed(for_metadata.threshold, threshold);
+    modify_field(for_metadata.threshold, threshold);
 }
 
 action for_loop(bitmap) {
-    add_to_filed(for_metadata.i, 1);
+    add_to_field(for_metadata.i, 1);
     SET_CLICK_BITMAP(bitmap);
 }
 
 table for_init {
     reads {
-        CHAIN_ID;
+        CLICK_ID: exact;
     }
     actions {
         for_init;
@@ -21,7 +21,7 @@ table for_init {
 
 table for_loop {
     reads {
-        CHAIN_ID;
+        CLICK_ID: exact;
     }
     actions {
         for_loop;
@@ -30,15 +30,11 @@ table for_loop {
 
 table for_end {
     reads {
-        CHAIN_ID;
+        CLICK_ID: exact;
     }
     actions {
         loop_end;
     }
-
-}
-
-table for_end {
 
 }
 
@@ -52,4 +48,5 @@ MODULE_INGRESS(for) {
     }
 }
 
+#undef MODULE
 #endif 

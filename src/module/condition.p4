@@ -19,4 +19,5 @@ MODULE_INGRESS(condition) {
     apply(condition_table);
 }
 
+#undef MODULE
 #endif

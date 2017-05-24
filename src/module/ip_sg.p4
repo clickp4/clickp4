@@ -14,7 +14,7 @@ action ipsg_miss() {
 
 table ipsg_permit_special {
     reads {
-        IPv4_PROTO : ternary;
+        ipv4.proto : ternary;
         udp.dst_port : ternary;
         tcp.dst_port : ternary;
         IPv4_DST_ADDR : ternary;

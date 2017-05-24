@@ -49,7 +49,7 @@
 
 #define IPv4_SRC_ADDR  ipv4.src_addr
 #define IPv4_DST_ADDR  ipv4.dst_addr
-#define IPv4_PROTO     ipv4.proto
+// #define IPv4_PROTO     ipv4.proto
 
 #define IPv6_SRC_ADDR  ipv6.src_addr
 #define IPv6_DST_ADDR  ipv6.dst_addr

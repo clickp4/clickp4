@@ -20,6 +20,11 @@ header tcp_t tcp;
 
 parser parse_tcp {
     extract(tcp);
+#ifdef L4_METADATA
+    set_metadata(l4_metadata.src_port, tcp.src_port);
+    set_metadata(l4_metadata.dst_port, tcp.dst_port);
+    set_metadata(l4_metadata.l4_type, L4_TYPE_TCP);
+#endif
     return ingress;
 }
 

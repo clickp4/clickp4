@@ -45,4 +45,5 @@ MODULE_INGRESS(if) {
     }
 }
 
+#undef MODULE
 #endif
