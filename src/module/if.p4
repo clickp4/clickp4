@@ -1,5 +1,14 @@
 #ifndef MODULE
-#define MODULE condition
+#define MODULE if
+
+/**
+ * IF
+ * If module has three branch: >, < and =
+ */
+
+#ifndef IF_TBL_SZ
+#define IF_TBL_SZ 512
+#endif
 
 action if_branch(state, bitmap) {
     SET_CLICK_STATE(state);
@@ -13,6 +22,7 @@ table if_small {
     actions {
          if_branch;
     }
+    size : IF_TBL_SZ;
 }
 
 table if_equal {
@@ -22,6 +32,7 @@ table if_equal {
     actions {
         if_branch;
     } 
+    size : IF_TBL_SZ;
 }
 
 table if_large {
@@ -31,6 +42,7 @@ table if_large {
     actions {
          if_branch;
     }
+    size : F_TBL_SZ;
 }
 
 MODULE_INGRESS(if) {
@@ -45,5 +57,6 @@ MODULE_INGRESS(if) {
     }
 }
 
+#undef IF_TBL_SZ
 #undef MODULE
 #endif

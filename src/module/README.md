@@ -3,6 +3,28 @@
 We have developed tens of modules for ClickP4. Some of them are ported from the switch repository. Some of them are newly added by us. And some of them are ported from the switch repository of P4.
 
 
+ TODO -> under developing (U) -> done (D) -> compiled (C) -> tested (T) 
+
+| ID | Module  | Status | Source | Description |
+|----|-------: | ------:|-------:|------------:|
+| 1 | if | C | New | Act like 'if' in the C language. |
+| 2 | for | C | New | Act like 'for' in the C language. |
+| 3 | condition | C | New | Act like 'switch' in the C language. |
+| 4 | while | C | New | Act like 'while' in general purpose languages. |
+| 5 | l2_switch | T | From examples in the P4 repository | Ethernet switch prototype. | 
+| 6 | l3_switch | T | From examples in the P4 repository | L3 switch prototype. | 
+| 7 | ecmp | C | From examples in the P4 repository | ECMP. |
+| 8 | firewall | C | From examples in the P4 repository | Firewall prototype. | 
+| 9 | egress_qos | U | Extracted from P4 switches | QoS at the end of the packet processing pipeline. | 
+| 10 | hash | U | Extracted from P4 switches | Hash functions. |
+
+
+| ID | Context | Status | Description |
+|----|-------: | ------:|------------:|
+| 1 | common_action | C | Contain some common actions. |
+
+
+
 ## Sample
 
 A sample module for ClickP4.
@@ -85,3 +107,13 @@ This module acts like 'while' in the C language.
 ## For
 This module acts like 'for' in the C language.
 
+Parameters: 
+
+#### FOR\_RESUBMIT\_FIELDS
+```
+Resubmit fields in the for loop.
+```
+
+## Firewall 
+
+A firewall prototype.

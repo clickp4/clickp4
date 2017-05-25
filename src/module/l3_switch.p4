@@ -1,3 +1,4 @@
+#ifndef MODULE
 #define MODULE l3_switch
 
 /* Context Dependency */
@@ -49,12 +50,14 @@ calculated_field ipv4.checksum  {
 }
 #endif
 
+/**
+ * Private metadata
+ */
 header_type l3_switch_metadata_t {
     fields {
         nhop_ipv4 : 32;
     }
 }
-
 metadata l3_switch_metadata_t l3_switch_metadata;
 
 action set_nhop(nhop_ipv4) {
@@ -120,3 +123,4 @@ MODULE_INGRESS(l3_switch) {
 #undef L3_SWITCH_TABLE_SIZE
 #undef L3_SWITCH_TBL_SIZE
 #undef MODULE
+#endif

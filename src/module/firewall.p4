@@ -1,4 +1,13 @@
+#ifndef MODULE
 #define MODULE firewall
+
+/**
+ * Simple firewall module 
+ */
+
+#ifndef FW_TBL_SZ
+#define FW_TBL_SZ 1024
+#endif
 
 table firewall_with_tcp {
     reads {
@@ -11,6 +20,7 @@ table firewall_with_tcp {
         block;
         nop;
     }
+    size : FW_TBL_SZ;
 }
 
 table firewall_with_udp {
@@ -24,19 +34,10 @@ table firewall_with_udp {
         block;
         nop;
     }
-}
-
-table forward_table {
-    reads {
-        standard_metadata.ingress_port : exact;
-    }
-    actions {
-        forward;
-    }
+    size : FW_TBL_SZ;
 }
 
 MODULE_INGRESS(firewall) {
-    apply(forward_table);
     if (valid(ipv4)) {
         if(valid(udp)) {
             apply(firewall_with_udp);
@@ -49,3 +50,4 @@ MODULE_INGRESS(firewall) {
 
 
 #undef MODULE
+#endif

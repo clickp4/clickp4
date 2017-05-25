@@ -1,6 +1,13 @@
+#ifndef MODULE
 #define MODULE ecmp
+/**
+ * ECMP Module
+ * A simple ecmp feature.
+ */
 
-
+/**
+ * ECMP module parameters and their default values.
+ */
 #ifndef ECMP_HASH_ALG
 #define ECMP_HASH_ALG bmv2_hash
 #endif 
@@ -10,6 +17,15 @@
 #endif
 
 #ifndef ECMP_HASH_FIELDS 
+
+#ifdef L4_METADATA
+#define ECMP_HASH_FIELDS \
+    ipv4.src_addr; \
+    ipv4.dst_addr; \
+    ipv4.proto;    \
+    l4_metadata.src_port;  \
+    l4_metadata.dst_port;
+#else
 #define ECMP_HASH_FIELDS \
     ipv4.src_addr; \
     ipv4.dst_addr; \
@@ -17,9 +33,9 @@
     tcp.src_port;  \
     tcp.dst_port;  \
     udp.src_port;  \
-    udp.dst_port
+    udp.dst_port;
 #endif
-
+#endif
 
 header_type ecmp_metadata_t {
     fields {
@@ -31,7 +47,7 @@ header_type ecmp_metadata_t {
 metadata ecmp_metadata_t ecmp_metadata;
 
 field_list ecmp_hash_fields {
-    ECMP_HASH_FIELDS;
+    ECMP_HASH_FIELDS
 }
 
 field_list_calculation ecmp_hash {
@@ -42,9 +58,9 @@ field_list_calculation ecmp_hash {
     output_width : ECMP_HASH_WIDTH;
 }
 
-action ecmp_group(id, size) {
+action ecmp_group(id, sz) {
     modify_field(ecmp_metadata.group_id, id);
-    modify_field_with_hash_based_offset(ecmp_metadata.selector, 0, ecmp_hash, size);
+    modify_field_with_hash_based_offset(ecmp_metadata.selector, 0, ecmp_hash, sz);
 }
 
 table ecmp_tbl {
@@ -81,4 +97,8 @@ MODULE_INGRESS(ecmp) {
     }
 }
 
+#undef ECMP_HASH_ALG
+#undef ECMP_HASH_FIELDS
+#undef ECMP_HASH_WIDTH
 #undef MODULE
+#endif

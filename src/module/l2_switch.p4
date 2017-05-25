@@ -49,7 +49,7 @@ table dmac {
 MODULE_INGRESS(l2_switch) {
 #if L2_SWITCH_LEARN == 1
     apply(smac);
-#endif    
+#endif
     apply(dmac);
 }
 
