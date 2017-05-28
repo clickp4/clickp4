@@ -4,6 +4,7 @@ CONTROLLER_IP=101.6.30.157
 CONTROLLER_PORT=40123
 INTF=-i 1@peth1 -i 2@peth2
 LOG=-L off
+# LOG=--log-console
 
 compile:
 	@mkdir -p build >>/dev/null
@@ -22,6 +23,26 @@ populate-l3:
 	@cp build/clickp4.json $(SWITCH_DIR)
 	@cd $(SWITCH_DIR)&&sudo bash simple_switch clickp4.json $(INTF) $(LOG) 
 	# -- --controller-ip=$(CONTROLLER_IP) --controller-port=$(CONTROLLER_PORT) 
+
+populate-init:
+	@cp test/l3_switch/commands-init $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands-init
+
+populate-plus-eth:
+	@cp test/l3_switch/commands-plus-eth $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands-plus-eth
+	
+populate-plus-ipv4:
+	@cp test/l3_switch/commands-plus-ipv4 $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands-plus-ipv4
+
+populate-plus-tcp:
+	@cp test/l3_switch/commands-plus-tcp $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands-plus-tcp
+
+populate-plus-udp:
+	@cp test/l3_switch/commands-plus-udp $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands-plus-udp
 
 
 run-exp1:

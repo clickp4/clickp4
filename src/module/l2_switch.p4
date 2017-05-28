@@ -1,3 +1,4 @@
+#ifndef MODULE
 #define MODULE l2_switch
 
 /* Module parameters */

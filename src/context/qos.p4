@@ -3,6 +3,7 @@
 
 header_type qos_metadata_t {
     fields {
+        priority : 7;
         ingress_qos_group: 5;
         tc_qos_group: 5;
         egress_qos_group: 5;

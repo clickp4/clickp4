@@ -1,7 +1,5 @@
 #define MODULE vlan
 
-
-
 action vlan_decap() {
 	modify_field(ethernet.eth_type, vlan.eth_type);
 	remove_header(vlan);
@@ -39,7 +37,7 @@ table vlan_filter{
 
 table vlan {
 	reads {
-		ethernet.src_mac  : exact;
+		ethernet.src_addr : exact;
 	}
 	actions {
 		vlan_encap;
@@ -47,7 +45,6 @@ table vlan {
 	}	
 	
 }
-
 
 MODULE_INGRESS(vlan) {
 	apply(vlan) {
