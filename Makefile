@@ -4,14 +4,16 @@ CONTROLLER_IP=101.6.30.157
 CONTROLLER_PORT=40123
 INTF=-i 1@peth1 -i 2@peth2
 LOG=-L off
-# LOG=--log-console
+COMMANDS1=commands1
+COMMANDS=commands
+#LOG=--log-console
 
 compile:
 	@mkdir -p build >>/dev/null
 	@python tools/parse_config.py
 	@p4c-bmv2 src/clickp4.p4 --json build/clickp4.json
 
-run:
+run: compile
 	@cp build/clickp4.json $(SWITCH_DIR)
 	@cd $(SWITCH_DIR)&&sudo bash simple_switch clickp4.json $(INTF) $(LOG)
 	# -- --controller-ip=$(CONTROLLER_IP) --controller-port=$(CONTROLLER_PORT) 
@@ -43,6 +45,14 @@ populate-plus-tcp:
 populate-plus-udp:
 	@cp test/l3_switch/commands-plus-udp $(SWITCH_DIR)
 	@cd $(SWITCH_DIR)&&./runtime_CLI <commands-plus-udp
+
+populate-rewind:
+	@cp test/rewinder/commands $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
+
+populate-redundant:
+	@cp test/redundant/commands $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
 
 
 run-exp1:
@@ -77,6 +87,161 @@ run-exp4:
 	@cd $(SWITCH_DIR)&&sudo bash simple_switch clickp4.json $(INTF) $(LOG) 
 	# -- --controller-ip=$(CONTROLLER_IP) --controller-port=$(CONTROLLER_PORT) 
 
+run-linear2: compile
+	@cp build/clickp4.json $(SWITCH_DIR)
+	@cd tools&&bash linear-2.sh
+
+run-linear3: compile
+	@cp build/clickp4.json $(SWITCH_DIR)
+	@cd tools&&bash linear-3.sh
+
+run-linear4: compile
+	@cp build/clickp4.json $(SWITCH_DIR)
+	@cd tools&&bash linear-4.sh
+
+run-linear5: compile
+	@cp build/clickp4.json $(SWITCH_DIR)
+	@cd tools&&bash linear-5.sh
+
+run-linear6: compile
+	@cp build/clickp4.json $(SWITCH_DIR)
+	@cd tools&&bash linear-6.sh
+
+run-linear7: compile
+	@cp build/clickp4.json $(SWITCH_DIR)
+	@cd tools&&bash linear-7.sh
+
+run-linear8: compile
+	@cp build/clickp4.json $(SWITCH_DIR)
+	@cd tools&&bash linear-8.sh
+
+populate-linear2:
+	@cp test/redundant/commands $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9091 <commands
+
+populate-linear3:
+	@cp test/redundant/commands $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9091 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9092 <commands
+
+populate-linear4:
+	@cp test/redundant/commands $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9091 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9092 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9093 <commands
+
+populate-linear5:
+	@cp test/redundant/commands $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9091 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9092 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9093 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9094 <commands
+
+populate-linear6:
+	@cp test/redundant/commands $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9091 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9092 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9093 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9094 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9095 <commands
+
+populate-linear7:
+	@cp test/redundant/commands $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9091 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9092 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9093 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9094 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9095 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9096 <commands
+
+populate-linear8:
+	@cp test/redundant/commands $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9091 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9092 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9093 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9094 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9095 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9096 <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9097 <commands
+
+
+populate-redundant-linear1:
+	@cp test/linear/commands $(SWITCH_DIR)
+	@cp test/linear/$(COMMANDS1) $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <$(COMMANDS)
+
+populate-redundant-linear2:
+	@cp test/linear/commands $(SWITCH_DIR)
+	@cp test/linear/$(COMMANDS1) $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <$(COMMANDS)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9091 <$(COMMANDS1)
+
+populate-redundant-linear3:
+	@cp test/linear/commands $(SWITCH_DIR)
+	@cp test/linear/$(COMMANDS1) $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <$(COMMANDS)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9091 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9092 <$(COMMANDS1)
+
+populate-redundant-linear4:
+	@cp test/linear/commands $(SWITCH_DIR)
+	@cp test/linear/$(COMMANDS1) $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9091 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9092 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9093 <$(COMMANDS1)
+
+populate-redundant-linear5:
+	@cp test/linear/commands $(SWITCH_DIR)
+	@cp test/linear/$(COMMANDS1) $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9091 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9092 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9093 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9094 <$(COMMANDS1)
+
+populate-redundant-linear6:
+	@cp test/linear/commands $(SWITCH_DIR)
+	@cp test/linear/$(COMMANDS1) $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9091 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9092 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9093 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9094 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9095 <$(COMMANDS1)
+
+populate-redundant-linear7:
+	@cp test/linear/commands $(SWITCH_DIR)
+	@cp test/linear/$(COMMANDS1) $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9091 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9092 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9093 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9094 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9095 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9096 <$(COMMANDS1)
+
+populate-redundant-linear8:
+	@cp test/linear/commands $(SWITCH_DIR)
+	@cp test/linear/$(COMMANDS1) $(SWITCH_DIR)
+	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9091 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9092 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9093 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9094 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9095 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9096 <$(COMMANDS1)
+	@cd $(SWITCH_DIR)&&./runtime_CLI --thrift-port 9097 <$(COMMANDS1)
+
+
+
 populate-exp4:
 	@cd $(SWITCH_DIR)&&./runtime_CLI <commands
 
@@ -105,3 +270,4 @@ clear-veth:
 
 nic-offload:
 	@bash tools/disable_nic_offload.sh
+

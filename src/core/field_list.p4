@@ -4,6 +4,9 @@
 #include "metadata.p4"
 
 field_list reserve_fields {
+    standard_metadata.ingress_port;
+    standard_metadata.egress_spec;
+    intrinsic_metadata;
     click_metadata;
 }
 
