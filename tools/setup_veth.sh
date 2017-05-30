@@ -6,6 +6,9 @@
 
 # JSON_FILE=${TEST_ROOT}/${1}/conf.json
 
+# Remove existing name spaces
+ip netns | xargs -I {} sudo ip netns delete {}
+
 sudo ip link add veth1 type veth peer name veth3
 sudo ip link add veth2 type veth peer name veth4
 
