@@ -13,6 +13,8 @@ Tested modules :
 7. simple\_loose\_urpf
 8. simple\_sg
 9. sflow
+10. simple\_nat
+11. hash
 
 
 
@@ -21,7 +23,6 @@ To be done:
 - condition.p4
 - egress_qos.p4
 - for
-- hash
 - if
 - ingress_qos
 - int_endpoint
@@ -45,7 +46,6 @@ To be done:
 - **simple\_lag**
 - **simple\_mac\_acl**
 - simple\_meterwe
-- simple\_nat
 - simple\_qos
 - **simple\_vxlan**
 - spanning_tree
@@ -58,7 +58,8 @@ To be done:
 - wcmp
 - while
 
-
+Working on:
+- ACL :MAC&IP (Chengze)
 
  TODO -> under developing (U) -> done (D) -> compiled (C) -> tested (T) 
 
