@@ -1,0 +1,16 @@
+sudo ethtool -K eth12 gro off
+sudo ethtool -K eth12 lro off
+sudo ethtool -K eth12 tso off
+sudo ethtool -K eth12 gso off
+sudo ethtool -K eth13 gro off
+sudo ethtool -K eth13 lro off
+sudo ethtool -K eth13 tso off
+sudo ethtool -K eth13 gso off
+sudo ethtool -K eth14 gro off
+sudo ethtool -K eth14 lro off
+sudo ethtool -K eth14 tso off
+sudo ethtool -K eth14 gso off
+sudo ethtool -K eth15 gro off
+sudo ethtool -K eth15 lro off
+sudo ethtool -K eth15 tso off
+sudo ethtool -K eth15 gso off

@@ -9,10 +9,11 @@
 #include "core/module.p4"
 
 control ingress {
-
+#if ENABLE_INITIALIZER == 1
     CHECK(0) {
         pipeline_start();
     }
+#endif
 
 #if INGRESS_MODULE_NUM > 1
 #ifdef MODULE_1
@@ -271,10 +272,11 @@ control ingress {
 //     }
 // #endif
 // #endif
-
+#if ENABLE_REWINDER == 1
     CHECK(31){
         pipeline_rewind();
     }
+#endif
 
 }
 

@@ -18,6 +18,10 @@ action forward(port) {
     modify_field(standard_metadata.egress_spec, port);
 }
 
+action flood() {
+    // TODO
+}
+
 action send_to_cpu() {
     modify_field(standard_metadata.egress_spec, 255);
 }

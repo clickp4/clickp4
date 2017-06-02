@@ -12,8 +12,8 @@
 
 #ifndef INIT_IPv4_MATCH 
 #define INIT_IPv4_MATCH  \
-            ipv4.src_addr : ternary; \
             ipv4.dst_addr : ternary; \
+            ipv4.src_addr : ternary; \
             ipv4.proto    : ternary;
 #endif
 

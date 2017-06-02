@@ -4,6 +4,10 @@
 
 #define REDUNDANT_NUM 9
 
+#define ENABLE_INITIALIZER 1
+#define ENABLE_REWINDER    1
+#define L2_SWITCH_LEARN    0
+
 // #define INIT_MATCH standard_metadata.ingress_port: ternary;
 
 #define INIT_ETH_MATCH

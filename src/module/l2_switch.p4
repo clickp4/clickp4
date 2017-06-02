@@ -58,3 +58,4 @@ MODULE_INGRESS(l2_switch) {
 #undef L2_SWITCH_DMAC_TABLE_SIZE
 #undef L2_SWITCH_LEARN
 #undef MODULE
+#endif
