@@ -37,5 +37,5 @@ table qos {
 MODULE_INGRESS(simple_qos) {
     apply(qos);
 }
-
+#undef MODULE
 #endif

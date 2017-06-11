@@ -2,7 +2,7 @@
 #define __CLICK_REWIND__
 
 
-#include "wrapper.p4"
+#include "macro.p4"
 #include "field_list.p4"
 
 action rewind (state, bitmap) {

@@ -3,6 +3,64 @@
 We have developed tens of modules for ClickP4. Some of them are ported from the switch repository. Some of them are newly added by us. And some of them are ported from the switch repository of P4.
 
 
+Tested modules :
+1. ecmp.p4
+2. firewall.p4
+3. fw.p4
+4. l3_switch
+5. redundant
+6. simple\_acl
+7. simple\_loose\_urpf
+8. simple\_sg
+9. sflow
+10. simple\_nat
+11. hash
+
+
+
+To be done:
+
+- condition.p4
+- egress_qos.p4
+- for
+- if
+- ingress_qos
+- int_endpoint
+- int_insert.p4
+- int\_out\_encap.p4
+- ip_acl
+- ip_sg
+- ipv4_fib
+- ipv6_fib
+- l2_switch
+- lag
+- mac
+- mac\_acl
+- mac\_learning
+- mpls
+- **mpls\_sr**
+- nat
+- outer\_multicast
+- pisces\_acl
+- simple\_hash
+- **simple\_lag**
+- **simple\_mac\_acl**
+- simple\_meterwe
+- simple\_qos
+- **simple\_vxlan**
+- spanning_tree
+- stateful\_tcp\_firewall
+- storm\_control
+- traffic\_class
+- vlan
+- vtep
+- vxlan
+- wcmp
+- while
+
+Working on:
+- ACL :MAC&IP (Chengze)
+
  TODO -> under developing (U) -> done (D) -> compiled (C) -> tested (T) 
 
 | ID | Module  | Status | Source | Description |
@@ -117,3 +175,6 @@ Resubmit fields in the for loop.
 ## Firewall 
 
 A firewall prototype.
+
+
+

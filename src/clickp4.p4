@@ -1,6 +1,6 @@
 #include "core/config.p4"
 #include "core/define.p4"
-#include "core/wrapper.p4"
+#include "core/macro.p4"
 #include "core/metadata.p4"
 #include "core/context.p4"
 #include "core/protocol.p4"

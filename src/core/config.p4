@@ -2,7 +2,7 @@
 #define EGRESS_MODULE_NUM 32
 
 
-#define REDUNDANT_NUM 9
+#define REDUNDANT_NUM 2
 
 #define ENABLE_INITIALIZER 1
 #define ENABLE_REWINDER    1

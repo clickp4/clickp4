@@ -7,6 +7,7 @@
 #include "../module/simple_sg.p4"
 #include "../module/fw.p4"
 #include "../module/simple_qos.p4"
+#include "../module/redundant.p4"
 
 
 #define MODULE_1 module_simple_ml()
@@ -15,6 +16,7 @@
 #define MODULE_4 module_simple_sg()
 #define MODULE_5 module_fw()
 #define MODULE_6 module_simple_qos()
+#define MODULE_7 module_redundant()
 
 
 #endif

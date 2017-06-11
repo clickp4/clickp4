@@ -1,7 +1,7 @@
 #ifndef __CLICK_START__
 #define __CLICK_START__
 
-#include "wrapper.p4"
+#include "macro.p4"
 
 #ifndef INIT_ETH_MATCH
 #define INIT_ETH_MATCH \

@@ -3,7 +3,7 @@ SWITCH_DBG_DIR=/home/netarchlab/bmv2-debug/targets/simple_switch
 CONTROLLER_DIR=/home/netarchlab/odb/router
 CONTROLLER_IP=101.6.30.157
 CONTROLLER_PORT=40123
-INTF=-i 1@peth1 -i 2@peth2
+INTF=-i 1@veth3 -i 2@veth4
 LOG=-L off
 COMMANDS1=commands1
 COMMANDS=commands
@@ -97,6 +97,8 @@ populate-l3:
 	@cp build/clickp4.json $(SWITCH_DIR)
 	@cd $(SWITCH_DIR)&&sudo bash simple_switch clickp4.json $(INTF) $(LOG) 
 	# -- --controller-ip=$(CONTROLLER_IP) --controller-port=$(CONTROLLER_PORT) 
+
+
 
 populate-init:
 	@cp test/l3_switch/commands-init $(SWITCH_DIR)

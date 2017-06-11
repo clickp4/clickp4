@@ -8,6 +8,78 @@
 #define IP_NAT_FLOW_TABLE_SIZE 1024
 #define EGRESS_NAT_TABLE_SIZE 1024
 #ifndef NAT_DISABLE
+
+
+
+/*****************************************************
+ Defining metadata
+ *****************************************************/
+header_type nat_metadata_t {
+    fields {
+        ingress_nat_mode : 2;          /* 0: none, 1: inside, 2: outside */
+        egress_nat_mode : 2;           /* nat mode of egress_bd */
+        nat_nexthop : 16;              /* next hop from nat */
+        nat_nexthop_type : 2;          /* ecmp or nexthop */
+        nat_hit : 1;                   /* fwd and rewrite info from nat */
+        nat_rewrite_index : 14;        /* NAT rewrite index */
+        update_checksum : 1;           /* update tcp/udp checksum */
+        update_inner_checksum : 1;     /* update inner tcp/udp checksum */
+        l4_len : 16;                   /* l4 length */
+    }
+}
+
+metadata nat_metadata_t nat_metadata;
+
+header_type l3_metadata_t {
+    fields {
+        lkp_ip_type : 2;
+        lkp_ip_version : 4;
+        lkp_ip_proto : 8;
+        lkp_dscp : 8;
+        lkp_ip_ttl : 8;
+        lkp_l4_sport : 16;
+        lkp_l4_dport : 16;
+        lkp_outer_l4_sport : 16;
+        lkp_outer_l4_dport : 16;
+
+        vrf : VRF_BIT_WIDTH;                   /* VRF */
+        rmac_group : 10;                       /* Rmac group, for rmac indirection */
+        rmac_hit : 1;                          /* dst mac is the router's mac */
+        urpf_mode : 2;                         /* urpf mode for current lookup */
+        urpf_hit : 1;                          /* hit in urpf table */
+        urpf_check_fail :1;                    /* urpf check failed */
+        urpf_bd_group : BD_BIT_WIDTH;          /* urpf bd group */
+        fib_hit : 1;                           /* fib hit */
+        fib_nexthop : 16;                      /* next hop from fib */
+        fib_nexthop_type : 2;                  /* ecmp or nexthop */
+        same_bd_check : BD_BIT_WIDTH;          /* ingress bd xor egress bd */
+        nexthop_index : 16;                    /* nexthop/rewrite index */
+        routed : 1;                            /* is packet routed? */
+        outer_routed : 1;                      /* is outer packet routed? */
+        mtu_index : 8;                         /* index into mtu table */
+        l3_copy : 1;                           /* copy packet to CPU */
+        l3_mtu_check : 16 (saturating);        /* result of mtu check */
+
+        egress_l4_sport : 16;
+        egress_l4_dport : 16;
+    }
+}
+
+metadata l3_metadata_t l3_metadata;
+
+
+header_type ipv4_metadata_t {
+    fields {
+        lkp_ipv4_sa : 32;
+        lkp_ipv4_da : 32;
+        ipv4_unicast_enabled : 1;      /* is ipv4 unicast routing enabled */
+        ipv4_urpf_mode : 2;            /* 0: none, 1: strict, 3: loose */
+    }
+}
+
+metadata ipv4_metadata_t ipv4_metadata;
+
+
 /*****************************************************************************/
 /* Ingress NAT lookup - src, dst, twice                                      */
 /*****************************************************************************/
@@ -131,7 +203,7 @@ control process_ingress_nat {
 #ifndef NAT_DISABLE
 action nat_update_l4_checksum() {
     modify_field(nat_metadata.update_checksum, 1);
-    add(nat_metadata.l4_len, ipv4.totalLen, -20);
+    add(nat_metadata.l4_len, ipv4.total_len, -20);
 }
 
 action set_nat_src_rewrite(src_ip) {
@@ -219,7 +291,7 @@ control process_egress_nat {
 #endif /* NAT_DISABLE */
 }
 
-MODULE_INGRESS(nat) {
+MODULE_INGRESS(simple_nat) {
     process_ingress_nat();
     process_egress_nat();
 }
