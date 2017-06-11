@@ -1,25 +1,26 @@
 #! /bin/bash
 
-ip link add veth1 type veth peer name veth3
-ip link add veth2 type veth peer name veth4
+sudo ip link add s1-eth2 type veth peer name s2-eth1
+sudo ip link add s2-eth2 type veth peer name s3-eth1
+sudo ip link add s3-eth2 type veth peer name s4-eth1
+sudo ip link add s4-eth2 type veth peer name s5-eth1
+sudo ip link add s5-eth2 type veth peer name s6-eth1
+sudo ip link add s6-eth2 type veth peer name s7-eth1
+sudo ip link add s7-eth2 type veth peer name s8-eth1
 
-ip netns add h1
-ip netns add h2
+# ifconfig eth0 promisc
+sudo ifconfig s1-eth2 up promisc
+sudo ifconfig s2-eth2 up promisc
+sudo ifconfig s3-eth2 up promisc
+sudo ifconfig s4-eth2 up promisc
+sudo ifconfig s5-eth2 up promisc
+sudo ifconfig s6-eth2 up promisc
+sudo ifconfig s7-eth2 up promisc
 
-ip link set veth3 netns h1
-ip link set veth4 netns h2
-
-ip netns exec h1 ifconfig lo up
-ip netns exec h2 ifconfig lo up
-
-ip netns exec h1 ifconfig veth3 hw ether 802200010001
-ip netns exec h2 ifconfig veth4 hw ether 802200010002
-
-ip netns exec h1 ifconfig veth3 10.0.0.1  up
-ip netns exec h2 ifconfig veth4 10.0.0.2  up
-
-ip netns exec h1 arp -s 10.0.0.2 80:22:00:01:00:02
-ip netns exec h2 arp -s 10.0.0.1 80:22:00:01:00:01
-
-ifconfig veth1 hw ether 000000000001 up
-ifconfig veth2 hw ether 000000000002 up
+sudo ifconfig s2-eth1 up promisc
+sudo ifconfig s3-eth1 up promisc
+sudo ifconfig s4-eth1 up promisc
+sudo ifconfig s5-eth1 up promisc
+sudo ifconfig s6-eth1 up promisc
+sudo ifconfig s7-eth1 up promisc
+sudo ifconfig s8-eth1 up promisc

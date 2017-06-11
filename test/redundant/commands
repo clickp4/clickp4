@@ -6,6 +6,14 @@ table_add forward_table set_dmac 0x0a000001 => 0x802200010001 1
 table_add forward_table set_dmac 0x0a000002 => 0x802200010002 2
 table_add send_frame set_smac 1 => 0x000000000001
 table_add send_frame set_smac 2 => 0x000000000002
+table_set_default redundant_table_1 redundant_action 1
+table_set_default redundant_table_2 redundant_action 1
+table_set_default redundant_table_3 redundant_action 1
+table_set_default redundant_table_4 redundant_action 1
+table_set_default redundant_table_5 redundant_action 1
+table_set_default redundant_table_6 redundant_action 1
+table_set_default redundant_table_7 redundant_action 1
+table_set_default redundant_table_8 redundant_action 1
 table_add redundant_table_1 redundant_action 0x0a000002&&&0xFFFFFFFF 0x0a000001&&&0xFFFFFFFF 0x0&&&0x0 0x0&&&0x0 0x0&&&0x0 => 1 1
 table_add redundant_table_1 redundant_action 0x0a000001&&&0xFFFFFFFF 0x0a000002&&&0xFFFFFFFF 0x0&&&0x0 0x0&&&0x0 0x0&&&0x0 => 1 1
 table_add redundant_table_2 redundant_action 0x0a000002&&&0xFFFFFFFF 0x0a000001&&&0xFFFFFFFF 0x0&&&0x0 0x0&&&0x0 0x0&&&0x0 => 1 1

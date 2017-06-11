@@ -3,8 +3,8 @@
 SWITCH_DIR=/home/netarchlab/bmv2/targets/simple_switch
 CONTROLLER_IP='101.6.30.157'
 CONTROLLER_PORT=40123
-INTF_1='-i 1@peth1'
-INTF_2='-i 2@peth2'
+INTF_1='-i 1@eth12'
+INTF_2='-i 2@eth13'
 INTF_S1_2='-i 2@s1-eth2'
 INTF_S2_1='-i 1@s2-eth1'
 INTF_S2_2='-i 2@s2-eth2'

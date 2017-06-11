@@ -3,11 +3,11 @@ SWITCH_DBG_DIR=/home/netarchlab/bmv2-debug/targets/simple_switch
 CONTROLLER_DIR=/home/netarchlab/odb/router
 CONTROLLER_IP=101.6.30.157
 CONTROLLER_PORT=40123
-INTF=-i 1@veth3 -i 2@veth4
+INTF=-i 1@eth12 -i 2@eth13 -i 3@eth14 -i 4@eth15 
 LOG=-L off
 COMMANDS1=commands1
 COMMANDS=commands
-#LOG=--log-console
+# LOG=--log-console
 
 compile:
 	@mkdir -p build >>/dev/null

@@ -2,10 +2,10 @@
 #define EGRESS_MODULE_NUM 32
 
 
-#define REDUNDANT_NUM 2
+#define REDUNDANT_NUM 4
 
-#define ENABLE_INITIALIZER 1
-#define ENABLE_REWINDER    1
+#define ENABLE_INITIALIZER 0
+#define ENABLE_REWINDER    0
 #define L2_SWITCH_LEARN    0
 
 // #define INIT_MATCH standard_metadata.ingress_port: ternary;
