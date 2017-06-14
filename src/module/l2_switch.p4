@@ -1,9 +1,8 @@
-#ifndef MODULE
 #define MODULE l2_switch
 
 /* Module parameters */
 #ifndef L2_SWITCH_LEARN
-#define L2_SWITCH_LEARN 1
+#define L2_SWITCH_LEARN 0
 #endif 
 
 #ifndef L2_SWITCH_SMAC_TABLE_SIZE
@@ -57,5 +56,3 @@ MODULE_INGRESS(l2_switch) {
 #undef L2_SWITCH_SMAC_TABLE_SIZE
 #undef L2_SWITCH_DMAC_TABLE_SIZE
 #undef L2_SWITCH_LEARN
-#undef MODULE
-#endif

@@ -28,7 +28,7 @@
 #endif
 
 action simple_acl_deny () {
-    block();
+    block_();
 
 #if SIMPLE_ACL_RESULT == 0
     modify_field(security_metadata.state, SEC_STATE_ALERT);
@@ -96,7 +96,7 @@ table ipv6_acl {
 #if SIMPLE_ACL_INLINE_DROP == 1
 table simple_acl_inline_drop {
     actions {
-        block;
+        block_;
     }
 }
 #endif

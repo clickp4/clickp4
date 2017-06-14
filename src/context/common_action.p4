@@ -9,7 +9,7 @@ action on_miss() {
     
 }
 
-action block() {
+action block_() {
 	modify_field(security_metadata.drop_flag, 1);
     drop();
 }

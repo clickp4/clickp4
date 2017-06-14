@@ -1,4 +1,3 @@
-#ifndef MODULE
 #define MODULE if
 
 /**
@@ -42,21 +41,33 @@ table if_large {
     actions {
          if_branch;
     }
-    size : F_TBL_SZ;
+    size : IF_TBL_SZ;
 }
 
-MODULE_INGRESS(if) {
-    if (if_metadata.left < if_metadata.right) {
-        apply(if_small);
+action sub() {
+    // add_to_field(if_metadata.right, 255);
+    subtract_from_field(if_metadata.left, if_metadata.right);
+}
+
+table if_sub {
+    actions {
+        sub;
     }
-    else if (if_metadata.left > if_metadata.right) {
+}
+
+
+MODULE_INGRESS(if) {
+    apply(if_sub);
+    if (if_metadata.left == 0) {
+        apply(if_equal);
+    }
+    else if (if_metadata.left < 0x80) {
         apply(if_large);
     } 
     else {
-        apply(if_equal);
+        apply(if_small);
     }
 }
 
 #undef IF_TBL_SZ
 #undef MODULE
-#endif

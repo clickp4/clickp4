@@ -107,7 +107,7 @@ table ipv6_sg {
 
 table sg_inline_drop {
 	actions {
-		block;
+		block_;
 	}
 }
 

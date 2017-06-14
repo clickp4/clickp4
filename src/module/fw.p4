@@ -21,7 +21,7 @@ table firewall {
         udp.dst_port  : ternary;
     }
     actions {
-        block;
+        block_;
         nop;
     }
     size : 1024;

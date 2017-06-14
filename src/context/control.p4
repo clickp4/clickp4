@@ -3,8 +3,8 @@
 
 header_type while_metadata_t {
     fields {
-        value : 32;
-        threshold : 32;
+        value : 8;
+        threshold : 8;
     }
 }
 
@@ -12,8 +12,8 @@ metadata while_metadata_t while_metadata;
 
 header_type for_metadata_t {
     fields {
-        i : 32;
-        threshold : 32;
+        i : 8;
+        threshold : 8;
     }
 }
 
@@ -21,8 +21,8 @@ metadata for_metadata_t for_metadata;
 
 header_type if_metadata_t {
     fields {
-        left  : 32;
-        right : 32;
+        left  : 8;
+        right : 8;
     }
 }
 
@@ -31,7 +31,7 @@ metadata if_metadata_t if_metadata;
 
 header_type condition_metadata_t {
     fields {
-        condition : 32;
+        condition : 8;
     }
 }
 

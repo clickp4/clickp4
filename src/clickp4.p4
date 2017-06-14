@@ -10,14 +10,14 @@
 
 control ingress {
 #if ENABLE_INITIALIZER == 1
-    CHECK(0) {
+    CHECK(1) {
         pipeline_start();
     }
 #endif
 
 #if INGRESS_MODULE_NUM > 1
 #ifdef MODULE_1
-    CHECK(1) {
+    CHECK(2) {
         MODULE_1;
     }
 #endif
@@ -26,7 +26,7 @@ control ingress {
 
 #if INGRESS_MODULE_NUM > 2
 #ifdef MODULE_2
-    CHECK(2) {
+    CHECK(4) {
         MODULE_2;
     }
 #endif
@@ -35,7 +35,7 @@ control ingress {
 
 #if INGRESS_MODULE_NUM > 3
 #ifdef MODULE_3
-    CHECK(3) {
+    CHECK(0x10) {
         MODULE_3;
     }
 #endif
@@ -44,7 +44,7 @@ control ingress {
 
 #if INGRESS_MODULE_NUM > 4
 #ifdef MODULE_4
-    CHECK(4) {
+    CHECK(0x20) {
         MODULE_4;
     }
 #endif
@@ -52,7 +52,7 @@ control ingress {
 
 #if INGRESS_MODULE_NUM > 5
 #ifdef MODULE_5
-    CHECK(5) {
+    CHECK(0x40) {
         MODULE_5;
     }
 #endif
@@ -61,7 +61,7 @@ control ingress {
 
 #if INGRESS_MODULE_NUM > 6
 #ifdef MODULE_6
-    CHECK(6) {
+    CHECK(0x80) {
         MODULE_6;
     }
 #endif
@@ -280,8 +280,9 @@ control ingress {
 
 }
 
-// control egress {
+control egress {
 
+}
 // #if EGRESS_MODULE_NUM > 1
 // #ifdef MODULE_32
 //     CHECK(32) {

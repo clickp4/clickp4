@@ -1,4 +1,3 @@
-#ifndef MODULE
 #define MODULE l3_switch
 
 /* Context Dependency */
@@ -71,7 +70,7 @@ table ipv4_nhop {
     }
     actions {
         set_nhop;
-        block;
+        //block;
     }
     size: L3_SWITCH_TABLE_SIZE;
 }
@@ -101,20 +100,74 @@ table send_frame {
     }
     actions {
         set_smac;
-        block;
+        block_;
     }
     size: L3_SWITCH_TABLE_SIZE;
 }
+///////////////////////////
 
+#ifndef IF_TBL_SZ
+#define IF_TBL_SZ 512
+#endif
+
+action if_branch(state, bitmap) {
+    SET_CLICK_STATE(state);
+    SET_CLICK_BITMAP(bitmap);
+}
+
+table if_small {
+    reads {
+        click_metadata.click_id : exact;
+    }
+    actions {
+         if_branch;
+    }
+    size : IF_TBL_SZ;
+}
+
+table if_equal {
+    reads {
+        click_metadata.click_id : exact;
+    }
+    actions {
+        if_branch;
+    } 
+    size : IF_TBL_SZ;
+}
+
+table if_large {
+    reads {
+        click_metadata.click_id : exact;
+    }
+    actions {
+         if_branch;
+    }
+    size : IF_TBL_SZ;
+}
+
+action sub() {
+    // add_to_field(if_metadata.right, 255);
+    subtract_from_field(if_metadata.left, if_metadata.right);
+}
+
+table if_sub {
+    actions {
+        sub;
+    }
+}
+///////////////////////////
 MODULE_INGRESS(l3_switch) {
 #if L3_SWITCH_BYPASS == 1
     if (security_metadata.state != SEC_STATE_DENY) {
 #endif
-        if(valid(ipv4) and ipv4.ttl > 0) {
-            apply(ipv4_nhop);
-            apply(forward_table);
-            apply(send_frame);
+        if(valid(ipv4)) {
+            if (ipv4.ttl != 0) {
+                apply(ipv4_nhop);
+                apply(forward_table);
+                apply(send_frame);
+            }
         }
+
 #if L3_SWITCH_BYPASS == 1
     }
 #endif
@@ -123,4 +176,3 @@ MODULE_INGRESS(l3_switch) {
 #undef L3_SWITCH_TABLE_SIZE
 #undef L3_SWITCH_TBL_SIZE
 #undef MODULE
-#endif

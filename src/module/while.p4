@@ -1,19 +1,13 @@
 #ifndef MODULE
 #define MODULE while
 
-#ifndef WHILE_FLOW_MATCH
-#define WHILE_FLOW_MATCH \
-        ipv4.src_addr : ternary; \
-        ipv4.dst_addr : ternary;
-#endif
-
 action set_threshold(threshold) {
     modify_field(while_metadata.threshold, threshold);
 }
 
 table while_init {
     reads {
-        WHILE_FLOW_MATCH
+        click_metadata.click_id : exact;
     }
     actions {
         set_threshold;
@@ -50,19 +44,33 @@ table while_large {
     }
 }
 
+
+action while_sub() {
+    // add_to_field(if_metadata.right, 255);
+    subtract_from_field(while_metadata.value, while_metadata.threshold);
+}
+
+table while_sub {
+    actions {
+        while_sub;
+    }
+}
+
+
 MODULE_INGRESS(while) {
     
     if (while_metadata.threshold == 0) {
         apply(while_init);
     }
-    if (while_metadata.value < while_metadata.threshold) {
-        apply(while_small);
+    apply(while_sub);
+    if (while_metadata.value == 0) {
+        apply(while_equal);
     }
-    else if (while_metadata.value > while_metadata.threshold) {
-        apply(while_large);
+    else if (while_metadata.value > 0x80) {
+        apply(while_small);
     } 
     else {
-        apply(while_equal);
+        apply(while_large);
     }
 }
 

@@ -18,19 +18,56 @@ action condition_branch(state, bitmap) {
     SET_CLICK_BITMAP(bitmap);
 }
 
-table condition_table {
+table condition_table_1 {
     reads {
         click_metadata.click_id : exact;
-        condition_metadata.condition :　exact;
+        condition_metadata.condition : exact;
     }
     actions {
          condition_branch;
     }
-    size : CONDITION_TABLE_SIZE;
+    size : 1024;
 }
 
+table condition_table_2 {
+    reads {
+        click_metadata.click_id : exact;
+        condition_metadata.condition : exact;
+    }
+    actions {
+         condition_branch;
+    }
+    size : 1024;
+}
+
+table condition_table_3 {
+    reads {
+        click_metadata.click_id : exact;
+        condition_metadata.condition : exact;
+    }
+    actions {
+         condition_branch;
+    }
+    size : 1024;
+}
+
+table condition_table_4 {
+    reads {
+        click_metadata.click_id : exact;
+        condition_metadata.condition : exact;
+    }
+    actions {
+         condition_branch;
+    }
+    size : 1024;
+}
+
+
 MODULE_INGRESS(condition) {
-    apply(condition_table);
+    apply(condition_table_1);
+    apply(condition_table_2);
+    apply(condition_table_3);
+    apply(condition_table_4);
 }
 
 #undef CONDITION_TABLE_SIZE

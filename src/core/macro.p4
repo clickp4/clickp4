@@ -14,8 +14,8 @@
 /**
  * Check condition.
  */
-#define CHECK(X) if(( CLICK_BITMAP & (1<<(X)) ) == 0)
-
+//#define CHECK(X) if(( CLICK_BITMAP & (X)) == 0)
+#define CHECK(X)
 
 
 #define MODULE_INGRESS(M) control module_##M

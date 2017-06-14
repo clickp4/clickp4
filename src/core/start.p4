@@ -64,6 +64,7 @@ table tbl_pipeline_start {
         act_set_chain;
         act_set_bitmap;
     }
+    
 }
 
 control pipeline_start {
